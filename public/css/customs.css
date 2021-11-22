@@ -1,0 +1,65 @@
+body .flex {
+    display: flex;
+}
+
+body .flex-align-center {
+    align-items: center;
+}
+
+body .justify-end-center {
+    justify-content: flex-end;
+    align-items: center;
+}
+
+body .justify-between {
+    justify-content: space-between;
+}
+
+body .flex-grow-1 {
+    flex-grow: 1;
+}
+
+body .flex-grow-2 {
+    flex-grow: 2;
+}
+
+body .pad-10 {
+    padding: 10px;
+}
+
+body .pad-20 {
+    padding: 20px;
+}
+
+body .margin-bottom-20 {
+    margin-bottom: 20px;
+}
+
+body .margin-right-20 {
+    margin-right: 20px;
+}
+
+body .font-size-15 {
+    font-size: 15px;
+}
+
+body .font-size-20 {
+    font-size: 20px;
+}
+
+body .activities {
+    height: 80px;
+}
+
+body .product {
+    height: 120px;
+    box-shadow: 3px 4px 15px;
+}
+
+body .product p {
+    margin: 0;
+}
+
+body .add-activity p {
+    margin: 0;
+}
