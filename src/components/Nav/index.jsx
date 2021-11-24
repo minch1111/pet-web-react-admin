@@ -26,9 +26,9 @@ export default function Nav() {
                 < hr className="sidebar-divider my-0" />
                 {/* Nav Item - Dashboard */}
                 <li li className="nav-item active" >
-                    <a className="nav-link" href="index.html">
+                    <Link className="nav-link" to="/">
                         <i class="fas fa-pager"></i>
-                        <span>Home</span></a>
+                        <span>Home</span></Link>
                 </li >
                 {/* Divider */}
                 < hr className="sidebar-divider" />
@@ -44,9 +44,11 @@ export default function Nav() {
                     </a>
                     <div id="collapseTwo" className="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                         <div className="bg-white py-2 collapse-inner rounded">
-                            <h6 className="collapse-header">Custom Components:</h6>
-                            <a className="collapse-item" href="buttons.html">Buttons</a>
-                            <a className="collapse-item" href="cards.html">Cards</a>
+                            <h6 className="collapse-header">Tasks:</h6>
+                            <Link className="collapse-item" to="#">Nhân Viên</Link>
+                            <a className="collapse-item" href="cards.html">Chức vụ</a>
+                            <a className="collapse-item" href="cards.html">Thu Chi</a>
+
                         </div>
                     </div>
                 </li >
@@ -59,8 +61,9 @@ export default function Nav() {
                     <div id="collapseUtilities" className="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                         <div className="bg-white py-2 collapse-inner rounded">
                             <h6 className="collapse-header">Tasks:</h6>
-                            <Link className="collapse-item" to="#">Nhãn Hiệu</Link>
+                            <Link className="collapse-item" to="/warehouse-manage/brand">Nhãn Hiệu</Link>
                             <Link className="collapse-item" to="/warehouse-manage">Sản Phẩm</Link>
+                            <Link className="collapse-item" to="/warehouse-manage/category">Danh Mục</Link>
                         </div>
                     </div>
                 </li >

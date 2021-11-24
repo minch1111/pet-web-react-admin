@@ -1,6 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { Context } from '../App'
+import useForm from '../hooks/useForm'
 
 export default function Login() {
+    let{form,error,handleSubmit,register} = useForm()
+    let {login,loginError} = useContext(Context);
+    const submit =()=>{
+        login(form)
+    }
     return (
         <div className="container">
             {/* Outer Row */}
@@ -16,12 +23,21 @@ export default function Login() {
                                         <div className="text-center">
                                             <h1 className="h4 text-gray-900 mb-4">Welcome Back!</h1>
                                         </div>
-                                        <form className="user">
+                                        <form onSubmit={handleSubmit(submit)} className="user">
+                                            {
+                                                loginError&& <label className="text-danger" > {loginError} </label>   
+                                            }
                                             <div className="form-group">
-                                                <input type="email" className="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address..." />
+                                                <input type="text" className="form-control form-control-user" {...register('username',{required:true})} placeholder="Enter Username..." />
+                                                {
+                                                    error.username&&<small className="text-danger"> {error.username} </small>
+                                                }
                                             </div>
                                             <div className="form-group">
-                                                <input type="password" className="form-control form-control-user" id="exampleInputPassword" placeholder="Password" />
+                                                <input type="password" className="form-control form-control-user" {...register('password',{required:true})} placeholder="Password" />
+                                                {
+                                                    error.password&&<small className="text-danger"> {error.password} </small>
+                                                }
                                             </div>
                                             <div className="form-group">
                                                 <div className="custom-control custom-checkbox small">
@@ -30,23 +46,14 @@ export default function Login() {
                                                         Me</label>
                                                 </div>
                                             </div>
-                                            <a href="index.html" className="btn btn-primary btn-user btn-block">
+                                            <button type="submit" className="btn btn-primary btn-user btn-block">
                                                 Login
-                                            </a>
+                                            </button>
                                             <hr />
-                                            <a href="index.html" className="btn btn-google btn-user btn-block">
-                                                <i className="fab fa-google fa-fw" /> Login with Google
-                                            </a>
-                                            <a href="index.html" className="btn btn-facebook btn-user btn-block">
-                                                <i className="fab fa-facebook-f fa-fw" /> Login with Facebook
-                                            </a>
                                         </form>
                                         <hr />
                                         <div className="text-center">
                                             <a className="small" href="forgot-password.html">Forgot Password?</a>
-                                        </div>
-                                        <div className="text-center">
-                                            <a className="small" href="register.html">Create an Account!</a>
                                         </div>
                                     </div>
                                 </div>
