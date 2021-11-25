@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import wareHouseService from '../../../services/warehouseService'
+import CategoryItem from './CategoryItem'
 
 export default function Category() {
     const [category, setCategory] = useState()
@@ -8,6 +9,12 @@ export default function Category() {
         let res = await wareHouseService.getCategory();
         setCategory(res.category)
     }, [])
+    const del = async()=>{
+        let res = await wareHouseService.getCategory();
+        if (res.category) {setCategory(res.category)} 
+    }
+    // console.log(`category`, category)
+    if(!category) return <div className="col-lg-12 flex justify-center" style={{height:"100vh"}}>Loading...</div>
     return (
         <>
             <div className="col-lg-12">
@@ -33,29 +40,11 @@ export default function Category() {
             </div>
             {
                 category?.map((o, i) => (
-                    <div className="col-lg-12">
-                        <Link to="#" className="category flex">
-                            <div className="category_name pad-10 flex flex-align-center flex-grow-2">
-                                <div className="brand_name font-weight-bold">
-                                    <p>{o.name} </p>
-                                </div>
-                            </div>
-                            <div className="product_action flex justify-end-center flex-grow-1">
-                                <div className="product_action-add-subcategory pad-10">
-                                    Thêm Danh Mục Con
-                                    <Link className="btn-circle btn-warning " to={`/warehouse-manage/add-subcategory/${o.slug}`} ><i class="fas fa-plus-square"></i></Link>
-                                </div>
-                                <div className="product_action-edit pad-10">
-                                    <Link className="btn-circle btn-warning " to="/warehouse-manage/edit" ><i className="far fa-edit font-size-20" /></Link>
-                                </div>
-                                <div className="product_action-remove pad-10">
-                                    <Link className="btn-circle btn-danger" to="#">
-                                        <i className="far fa-trash-alt font-size-20" />
-                                    </Link>
-                                </div>
-                            </div>
-                        </Link>
-                    </div>
+                  <CategoryItem 
+                    key={i}
+                    data={o}
+                    del={()=>del()}
+                  />
                 ))
             }
         </>

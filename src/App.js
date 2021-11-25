@@ -23,13 +23,14 @@ export const Context = createContext()
 function App() {
 
   const [user, setUser] = useState(localStorage.getItem('loginAdmin'))
+  // const [brands,setBrands] = useState(localStorage.getItem('brands'))
   const [loginError, setLoginError] = useState()
   const login = async (form) => {
     try {
       let res = await authServices.login(form)
       // console.log(`token`, res.accessToken)
       if(res?.success){
-        localStorage.setItem('loginAdmin',JSON.stringify(res))
+        localStorage.setItem('loginAdmin',JSON.stringify(res.customer))
         localStorage.setItem('token',JSON.stringify(res.accessToken))
         setUser(localStorage.getItem('loginAdmin'))
         setLoginError()
@@ -45,6 +46,7 @@ function App() {
   }
   const logout = () => {
     localStorage.removeItem('loginAdmin')
+    localStorage.removeItem('token')
     setUser(localStorage.getItem('loginAdmin'))
     setLoginError()
   }
@@ -55,7 +57,7 @@ function App() {
       {/* <Login /> */}
 
       {/* user ? (<Register />) : ( */}
-      <Context.Provider value={{ user,loginError, login, logout }}>
+      <Context.Provider value={{ user,loginError, login, logout}}>
         <Router>
           {
             !user ? (<Login />) :

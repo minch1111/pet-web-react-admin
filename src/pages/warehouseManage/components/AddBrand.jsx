@@ -11,14 +11,14 @@ export default function AddBrand() {
     const submit =async ()=>{
         setInfo(form)
         let res = await warehouseService.addNewBrand(form)
-        // if(res) alert("Đã Thêm Thành Công 😄")
-        console.log(`res`, res)
+        if(res.success) alert("Đã Thêm Thành Công 😄")
+        // console.log(`res`, res)
     }
     useEffect(async () => {
         let res = await warehouseService.getAllSubCategory();
         setAllSubCategory(res.subCategory)
     }, [])
-    console.log(`info`, info)
+    // console.log(`info`, info)
     // console.log(`allSubCategory`, allSubCategory)
     return (
         <div className="col-lg-12">

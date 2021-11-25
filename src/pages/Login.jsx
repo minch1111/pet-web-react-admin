@@ -21,7 +21,7 @@ export default function Login() {
                                 <div className="col-lg-6">
                                     <div className="p-5">
                                         <div className="text-center">
-                                            <h1 className="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                                            <h1 className="h4 text-gray-900 mb-4">Welcome to Pet Paradise Administrator!</h1>
                                         </div>
                                         <form onSubmit={handleSubmit(submit)} className="user">
                                             {
@@ -39,22 +39,21 @@ export default function Login() {
                                                     error.password&&<small className="text-danger"> {error.password} </small>
                                                 }
                                             </div>
-                                            <div className="form-group">
+                                            {/* <div className="form-group">
                                                 <div className="custom-control custom-checkbox small">
                                                     <input type="checkbox" className="custom-control-input" id="customCheck" />
                                                     <label className="custom-control-label" htmlFor="customCheck">Remember
                                                         Me</label>
                                                 </div>
-                                            </div>
+                                            </div> */}
                                             <button type="submit" className="btn btn-primary btn-user btn-block">
                                                 Login
                                             </button>
                                             <hr />
                                         </form>
-                                        <hr />
-                                        <div className="text-center">
+                                        {/* <div className="text-center">
                                             <a className="small" href="forgot-password.html">Forgot Password?</a>
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </div>
                             </div>

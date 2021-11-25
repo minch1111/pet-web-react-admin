@@ -12,6 +12,7 @@ import EditBrand from './components/EditBrand'
 import Category from './components/Category'
 import AddNewCategory from './components/AddCategory'
 import AddSubCategory from './components/AddSubCategory'
+import EditCategory from './components/EditCategory'
 
 export default function WareHouseManage() {
     // console.log(`object`)
@@ -27,6 +28,7 @@ export default function WareHouseManage() {
                     <Route path="/warehouse-manage/brand" exact component={Brand} />
                     <Route path="/warehouse-manage/category" exact component={Category} />
                     <Route path="/warehouse-manage/category/add" component={AddNewCategory} />
+                    <Route path="/warehouse-manage/category/edit/:slug" component={EditCategory} />
                     <Route path="/warehouse-manage/add-subcategory/:slug" component={AddSubCategory} />
                 </Switch>
                 {/* <AddProduct /> */}

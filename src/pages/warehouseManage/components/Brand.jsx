@@ -2,14 +2,41 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import img from "../../../assets/img/pate.png"
 import wareHouseService from '../../../services/warehouseService'
+import BrandItem from './BrandItem'
 
 export default function Brand() {
+    let a = []
     let [brands, setBrands] = useState()
+    let [filter, setFilter] = useState()
+    let [subCategory, setSubCategory] = useState()
     useEffect(async () => {
         let res = await wareHouseService.getBrand();
-        if (res) setBrands(res.brand)
+        let res2 = await wareHouseService.getAllSubCategory();
+        if (res) { setBrands(res); setFilter(res) }
+        if (res2.success) setSubCategory(res2.subCategory)
     }, [])
-    if (!brands) return <div className="col-lg-12 flex justify-center">Loading...</div>
+    const del = async () => {
+        let res = await wareHouseService.getBrand();
+        if (res.brand) setBrands(res.brand)
+    }
+    const handleChange = (ev) => {
+        let idSubTarget = ev.currentTarget.value
+        if (idSubTarget === "") {
+            setFilter(brands)
+        }
+        else {
+            a = brands.filter(o =>
+                o.idSub == idSubTarget
+            )
+            setFilter(a)
+        }
+
+        console.log(`idSubTarget`, idSubTarget)
+    }
+    // console.log(`a`, a)
+    console.log(`brands`, brands)
+    console.log(`subCategory`, subCategory)
+    if (!brands && !subCategory) return <div className="col-lg-12 flex justify-center">Loading...</div>
     return (
         <>
             <div className="col-lg-12">
@@ -31,28 +58,29 @@ export default function Brand() {
                             </div>
                         </form>
                     </div>
+                    <div className="form-group">
+                        <select class="form-select form-control" onChange={handleChange} >
+                            <option selected value="">Tìm kiếm theo danh mục</option>
+                            {
+                                subCategory?.map((o, i) => (
+                                    <option key={i} value={o._id}>{o.name}</option>
+                                ))
+                            }
+                            {/* <option value="do-an-cho-cho">Đồ ăn cho chó</option>
+                        <option value="do-an-cho-meo">Đồ ăn cho mèo</option>
+                        <option value="3">Three</option> */}
+                        </select>
+                    </div>
                 </div>
             </div>
 
             {
-                brands?.map((o, i) => (
-                    <div className="col-lg-3 margin-bottom-20" key={i}>
-                        <div className="brand">
-                            <div className="brand-cate">
-                                <div className="product_action pad-10  flex justify-center flex-align-center">
-                                    <div className="brand_name margin-0-20 font-weight-bold ">
-                                        <p> {o?.name} </p>
-                                    </div>
-                                    <Link className="product_action-edit margin-0-20 text-warning" to={`/warehouse-manage/brand/edit/${o.slug}`}>
-                                        <i className="far fa-edit font-size-20" />
-                                    </Link>
-                                    <div className="product_action-remove margin-0-20 text-danger">
-                                        <i className="far fa-trash-alt font-size-20" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                filter?.map((o, i) => (
+                    <BrandItem
+                        key={i}
+                        data={o}
+                        del={() => del()}
+                    />
                 ))
             }
 
