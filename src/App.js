@@ -15,6 +15,7 @@ import {
 import PrivateRoute from "./components/PrivateRoute";
 import Page404 from "./pages/Page404";
 import authServices from "./services/authServices";
+import MainManage from "./pages/mainManage";
 export const Context = createContext()
 
 
@@ -71,6 +72,7 @@ function App() {
                       <Switch>
                         <PrivateRoute exact path="/" component={Home} />
                         <PrivateRoute path="/warehouse-manage" component={WareHouseManage} />
+                        <PrivateRoute path="/main-manager" component={MainManage} />
                         <PrivateRoute> <Page404 /> </PrivateRoute>
                       </Switch>
                       {/* <WareHouseManage /> */}

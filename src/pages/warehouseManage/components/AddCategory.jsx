@@ -7,7 +7,7 @@ export default function AddNewCategory() {
 
     let {form,error,handleSubmit,register} = useForm()
     const submit =async ()=>{
-        let res = await wareHouseService.addCategory(form)
+        let res = await wareHouseService.addNewCategory(form)
         if(res.success) alert("Đã Thêm Thành Công 😄")
     }
     return (
@@ -19,9 +19,9 @@ export default function AddNewCategory() {
                 </div>
                 <div className="form-group">
                     <label>Tên Danh Mục</label>
-                    <input type="text" {...register('name',{required:true})} id className="form-control" placeholder="Nhập tên danh mục" />
+                    <input type="text" {...register('name',{required:true})}  className="form-control" placeholder="Nhập tên danh mục" />
                     {
-                        error.name&& <small className="text-danger"> {error.name} </small>
+                        error.name&&<small className="text-danger"> {error.name} </small>
                     }
                 </div>
                 <button className="btn btn-success margin-top-20">Thêm</button>

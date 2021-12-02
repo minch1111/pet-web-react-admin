@@ -7,13 +7,13 @@ export default function Category() {
     const [category, setCategory] = useState()
     useEffect(async () => {
         let res = await wareHouseService.getCategory();
-        setCategory(res.category)
+        if(res.success) setCategory(res.category)
     }, [])
     const del = async()=>{
         let res = await wareHouseService.getCategory();
         if (res.category) {setCategory(res.category)} 
     }
-    // console.log(`category`, category)
+    console.log(`category`, category)
     if(!category) return <div className="col-lg-12 flex justify-center" style={{height:"100vh"}}>Loading...</div>
     return (
         <>

@@ -10,18 +10,21 @@ export default function BrandItem(props) {
     const [showDetail, setShowDetail] = useState(false)
     const del = async () => {
         let res = await wareHouseService.removeBrand(props.data._id)
-        if (res.success) props.del()
+        if (res.success) {props.del()}
+        // else{
+        //     alert(res.message + " Hiện nhãn hiệu này đang bị ràng buộc")
+        // }
     }
     const show = () => {
         setShowDetail(!showDetail)
     }
     // console.log(`props.data`, props.data)
     return (
-        <div className="col-lg-4 margin-bottom-20" >
+        <div className="col-lg-4 col-md-4 margin-bottom-40" >
             <div className="brand">
                 <div className="brand-cate" >
                     <div className="product_action pad-10  flex justify-center flex-align-center">
-                        <div className="brand_name margin-0-20 font-weight-bold ">
+                        <div className="brand_name margin-0-10 font-weight-bold ">
                             <p> {props.data?.name} </p>
                         </div>
                         <Link onClick={show} className="product_action-edit margin-0-20 " to="#">

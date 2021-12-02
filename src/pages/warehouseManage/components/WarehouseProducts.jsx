@@ -1,8 +1,23 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import img from "../../../assets/img/pate.png"
+import wareHouseService from '../../../services/warehouseService'
 
 export default function WarehouseProducts() {
+
+    let [products, setProducts] = useState()
+
+    useEffect(async () => {
+        let res = await wareHouseService.getAllProducts();
+        if (res?.product) setProducts(res.product)
+        if (res) console.log(`res`, res)
+    }, [])
+
+    const del = async () => {
+        let res = await wareHouseService.getAllProducts();
+        if (res?.product) setProducts(res.product)
+    }
+    // if(!products) return <div className="col-lg-12">Loading...</div>
     return (
         <>
             <div className="col-lg-12">
@@ -38,33 +53,65 @@ export default function WarehouseProducts() {
                     </div>
                 </div>
             </div>
-            <div className="col-lg-12">
-                <div className="product flex">
-                    <div className="product_img pad-10">
-                        <img src={img} className="h-100" alt="" />
+            {
+                products?.map((o, i) => (
+                    <ProductItem
+                        key={i}
+                        data={o}
+                        del={() => del()}
+                    />
+                ))
+            }
+        </>
+    )
+}
+
+export const ProductItem = (props) => {
+
+
+    const money = (a) => {
+        return a.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })
+    }
+
+    const delProduct = async (ev) => {
+        ev.preventDefault();
+        let res = await wareHouseService.removeProduct(props.data._id);
+        if (res.success) {
+            alert("Đã xoá thành công")
+            props.del()
+        }
+        else{
+            alert(res.message)
+        }
+    }
+    return (
+        <div className="col-lg-6">
+            <div className="product flex pad-10">
+                <div className="product_img">
+                    <img src={props.data.imageRepresent[0].url} className="h-100" alt="" />
+                </div>
+                <div className="product_info  flex-grow-3 ">
+                    <div className="brand_name font-weight-bold pad-0-10">
+                        <p> {props.data.brand} </p>
                     </div>
-                    <div className="product_info pad-10 flex-grow-2">
-                        <div className="brand_name font-weight-bold">
-                            <p>Nutrifood</p>
-                        </div>
-                        <div className="detail">
-                            <p className="name">Đồ ăn cho chó</p>
-                            <p className="money">Giá: <span>$2.57</span></p>
-                            <p className="quantity">Số lượng tồn: <span className="font-size-15">50</span></p>
-                        </div>
+                    <div className="detail">
+                        <p className="name"> {props.data.name} </p>
+                        <p className="money">Giá: <span> {money(props.data?.price)} </span></p>
+                        {/* <p className="quantity">Số lượng tồn: <span className="font-size-15">50</span></p> */}
                     </div>
-                    <div className="product_action pad-10 flex justify-end-center flex-grow-1">
-                        <div className="product_action-edit pad-20">
-                            <Link className="btn-circle btn-warning " to="/warehouse-manage/edit" ><i className="far fa-edit font-size-20" /></Link>
-                        </div>
-                        <div className="product_action-remove pad-20">
-                            <Link className="btn-circle btn-danger" to="#">
-                                <i className="far fa-trash-alt font-size-20" />
-                            </Link>
-                        </div>
+                </div>
+                <div className="product_action flex justify-end-center flex-grow-1">
+                    <div className="product_action-edit pad-10">
+                        <Link className="btn-circle btn-warning " to={`/warehouse-manage/edit/${props.data.slug}`} ><i className="far fa-edit font-size-20" /></Link>
+                    </div>
+                    <div className="product_action-remove pad-10">
+                        <Link onClick={delProduct} className="btn-circle btn-danger" to="#">
+                            <i className="far fa-trash-alt font-size-20" />
+                        </Link>
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     )
+
 }

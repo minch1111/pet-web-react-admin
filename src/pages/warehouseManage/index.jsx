@@ -20,8 +20,9 @@ export default function WareHouseManage() {
         <div className="container">
             <div className="row">
                 <Switch >
+                    {/* WareHouse Manager */}
                     <Route path="/warehouse-manage/add" component={AddProduct} />
-                    <Route path="/warehouse-manage/edit" component={EditProduct} />
+                    <Route path="/warehouse-manage/edit/:slug" component={EditProduct} />
                     <Route path="/warehouse-manage" exact component={WarehouseProducts}/>
                     <Route path="/warehouse-manage/brand/add" component={AddBrand} />
                     <Route path="/warehouse-manage/brand/edit/:slug" component={EditBrand} />

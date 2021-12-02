@@ -6,7 +6,7 @@ export default function CategoryItem(props) {
     const [subCategory, setSubCategory] = useState()
     const [showSubCate, setShowSubCate] = useState(false)
     useEffect(async () => {
-        let res = await wareHouseService.getSubCategoryWithCategory(props.data.slug)
+        let res = await wareHouseService.getSubCategoryBySlugCategory(props.data.slug)
         if (res?.success) setSubCategory(res.subCategory)
     }, [])
     // console.log(`subCategory`, subCategory)
@@ -21,7 +21,7 @@ export default function CategoryItem(props) {
 
     return (
         <div className="col-lg-12">
-            <div className="category">
+            <div className="category margin-bottom-10 pad-10">
                 <div to="#" className="category_action flex w-100">
                     <div className="category_name pad-10 flex flex-align-center flex-grow-2">
                         <div className="brand_name font-weight-bold">
@@ -52,7 +52,7 @@ export default function CategoryItem(props) {
                     </div>
                 </div>
                 {
-                    showSubCate === true ? (<div className="row pad-20">
+                    showSubCate === true ? (<div className="row pad-20 ">
                         {
                             subCategory?.map((o, i) => (
                                 <div className="col-lg-12" key={i}>

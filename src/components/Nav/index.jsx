@@ -16,7 +16,7 @@ export default function Nav() {
         <>
             < ul className="navbar-nav bg-gradient-secondary sidebar sidebar-dark accordion" id="accordionSidebar" >
                 {/* Sidebar - Brand */}
-                <Link  className="sidebar-brand d-flex align-items-center justify-content-center" to="/" >
+                <Link className="sidebar-brand d-flex align-items-center justify-content-center" to="/" >
                     <div className="sidebar-brand-icon">
                         <img src={logo} alt="" style={{ width: '24px' }} />
                     </div>
@@ -45,9 +45,9 @@ export default function Nav() {
                     <div id="collapseTwo" className="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                         <div className="bg-white py-2 collapse-inner rounded">
                             <h6 className="collapse-header">Tasks:</h6>
-                            <Link className="collapse-item" to="#">Nhân Viên</Link>
+                            <Link  className="collapse-item" to="/main-manager/staffs">Nhân Viên</Link>
                             <a className="collapse-item" href="cards.html">Chức vụ</a>
-                            <a className="collapse-item" href="cards.html">Thu Chi</a>
+                            <Link className="collapse-item" to="/main-manager/report">Thu Chi</Link>
 
                         </div>
                     </div>
@@ -104,7 +104,10 @@ export default function Nav() {
                         </div>
                     </div>
                 </li >
-
+                <br />
+                <div class="text-center d-none d-md-inline">
+                    <button class="rounded-circle border-0" id="sidebarToggle"></button>
+                </div>
                 {/* Sidebar Message */}
                 {/* <div class="sidebar-card d-none d-lg-flex">
               <img class="sidebar-card-illustration mb-2" src="img/undraw_rocket.svg" alt="...">

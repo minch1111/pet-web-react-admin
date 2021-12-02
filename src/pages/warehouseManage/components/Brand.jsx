@@ -17,7 +17,10 @@ export default function Brand() {
     }, [])
     const del = async () => {
         let res = await wareHouseService.getBrand();
-        if (res.brand) setBrands(res.brand)
+        if (res) {
+            setBrands(res);
+            setFilter(res)
+        }
     }
     const handleChange = (ev) => {
         let idSubTarget = ev.currentTarget.value
@@ -36,7 +39,7 @@ export default function Brand() {
     // console.log(`a`, a)
     console.log(`brands`, brands)
     console.log(`subCategory`, subCategory)
-    if (!brands && !subCategory) return <div className="col-lg-12 flex justify-center">Loading...</div>
+    // if (!brands && !subCategory) return <div className="col-lg-12 flex justify-center">Loading...</div>
     return (
         <>
             <div className="col-lg-12">
