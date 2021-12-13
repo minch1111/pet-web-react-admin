@@ -55,6 +55,18 @@ const mainManageService={
            },
            body:JSON.stringify(form)
        }).then(res=>res.json())
+   },
+   addNews(form){
+       return fetch(`${api}/media/news/store`,{
+           method:'POST',
+           headers:{
+               'Content-Type':'application/json'
+           },
+           body:JSON.stringify(form)
+       }).then(res=>res.json())
+   },
+   getListNews(){
+       return fetch(`${api}/media/news`).then(res=>res.json())
    }
 
 }
