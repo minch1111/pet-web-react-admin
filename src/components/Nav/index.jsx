@@ -46,7 +46,7 @@ export default function Nav() {
                         <div className="bg-white py-2 collapse-inner rounded">
                             <h6 className="collapse-header">Tasks:</h6>
                             <Link  className="collapse-item" to="/main-manager/staffs">Nhân Viên</Link>
-                            <a className="collapse-item" href="/main-manager/permission">Chức vụ</a>
+                            <Link className="collapse-item" to="/main-manager/permission">Chức vụ</Link>
                             <Link className="collapse-item" to="/main-manager/report">Thu Chi</Link>
                             <Link className="collapse-item" to="/main-manager/vouchers" > Voucher </Link>
 
