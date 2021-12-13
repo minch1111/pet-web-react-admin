@@ -8,10 +8,11 @@ body a:hover {
     color: #707070;
 }
 
-body .text-color-white{
+body .text-color-white {
     color: white;
 }
-body .h-200px{
+
+body .h-200px {
     height: 200px !important;
 }
 
@@ -40,7 +41,7 @@ body .justify-between {
     justify-content: space-between;
 }
 
-body .justify-evenly{
+body .justify-evenly {
     justify-content: space-evenly;
 }
 
@@ -51,13 +52,16 @@ body .flex-grow-1 {
 body .flex-grow-2 {
     flex-grow: 2;
 }
+
 body .flex-grow-2 {
     flex-grow: 3;
 }
-body .pad-5{
+
+body .pad-5 {
     padding: 5px
 }
-body .pad-0-10{
+
+body .pad-0-10 {
     padding: 0 10px;
 }
 
@@ -72,6 +76,7 @@ body .pad-20 {
 body .margin-bottom-20 {
     margin-bottom: 20px;
 }
+
 body .margin-bottom-40 {
     margin-bottom: 40px;
 }
@@ -157,15 +162,58 @@ body .month_report {
     box-shadow: 2px 2px 6px 0px;
 }
 
-body .dropdown{
+body .dropdown {
     height: 0;
 }
-body .dropdown.is-dropped{
+
+body .dropdown.is-dropped {
     height: auto;
-    transition: all .4s linear; 
+    transition: all .4s linear;
 }
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+body .background-darkgreen {
+    background-color: #00bfa5;
+}
+
+body .background-darkorange {
+    background-color: #ee4d2d;
+}
+
+body .voucher_item {
+    position: relative;
+    cursor: pointer;
+}
+
+body .voucher_item p {
+    margin: 0;
+}
+
+body .voucher_item .voucher_item-img {
+    min-width: 126px;
+    max-width: 126px;
+    height: 126px;
+}
+
+body .voucher_item .voucher_item-img:hover .voucher_item-icon {
+    transform: translateX(25px) rotate(360deg);
+    transition: all .6s ease;
+}
+
+body .voucher_item .voucher_item-icon {
+    position: absolute;
+    top: 10px;
+    left: 15px;
+    color: white;
+    transform: translateX(0);
+    transition: all .6s ease;
+}
+
+body #dataTable_filter{
+    float: right;
 }

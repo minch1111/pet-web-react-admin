@@ -81,7 +81,7 @@ export const ProductItem = (props) => {
             props.del()
         }
         else{
-            alert(res.message)
+            alert(res.message.error.message)
         }
     }
     return (

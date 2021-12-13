@@ -23,7 +23,7 @@ export const Context = createContext()
 
 function App() {
 
-  const [user, setUser] = useState(localStorage.getItem('loginAdmin'))
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('loginAdmin')))
   // const [brands,setBrands] = useState(localStorage.getItem('brands'))
   const [loginError, setLoginError] = useState()
   const login = async (form) => {
@@ -33,7 +33,7 @@ function App() {
       if(res?.success){
         localStorage.setItem('loginAdmin',JSON.stringify(res.customer))
         localStorage.setItem('token',JSON.stringify(res.accessToken))
-        setUser(localStorage.getItem('loginAdmin'))
+        setUser(JSON.parse(localStorage.getItem('loginAdmin')))
         setLoginError()
       }
       else{

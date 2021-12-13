@@ -265,19 +265,14 @@ export default function AddProduct() {
                     </div>
                 </div>
                 <div className="form-group">
-                    <label htmlFor>Hình Ảnh</label>
-                    <input type="file" id="file-input" onChange={handleChangeList} className="form-control" multiple accept="gif|jpg|png" />
+                    <label >Hình Ảnh</label>
+                    
+                    <input type="file" id="file-input" onChange={handleChangeList} className="form-control btn-file" multiple accept="gif|jpg|png" />
+                    
                     <div id="preview" className="margin-top-20 pad-20" style={{ border: '1px solid #d1d3e2', borderRadius: '7px' }}>
                         <p>No file chosen</p>
                     </div>
 
-                </div>
-                <div class="form-group">
-                    <Upload >
-                        <Button>
-                            Upload
-                        </Button>
-                    </Upload>
                 </div>
                 <button type="submit" className="btn btn-success btn-block">Thêm</button>
             </form>
