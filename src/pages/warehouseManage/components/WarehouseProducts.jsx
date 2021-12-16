@@ -2,14 +2,24 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import img from "../../../assets/img/pate.png"
 import wareHouseService from '../../../services/warehouseService'
+import Pagination from '../../../components/Pagination'
+import { convertQueryToObject } from "../../../utils";
 
 export default function WarehouseProducts() {
 
     let [products, setProducts] = useState()
+    let [page, setPage] = useState()
+    let queryURL = convertQueryToObject()
+    console.log(`queryURL`, queryURL)
+    // console.log(`product`, products)
 
     useEffect(async () => {
         let res = await wareHouseService.getAllProducts();
-        if (res?.product) setProducts(res.product)
+        if (res?.product) {
+
+            setProducts(res.product);
+            setPage(res.pages)
+        }
         if (res) console.log(`res`, res)
     }, [])
 
@@ -17,7 +27,8 @@ export default function WarehouseProducts() {
         let res = await wareHouseService.getAllProducts();
         if (res?.product) setProducts(res.product)
     }
-    // if(!products) return <div className="col-lg-12">Loading...</div>
+    // console.log(`products`, products)
+    if (!products) return <div className="col-lg-12">Loading...</div>
     return (
         <>
             <div className="col-lg-12">
@@ -62,6 +73,12 @@ export default function WarehouseProducts() {
                     />
                 ))
             }
+            <div className="col-lg-12" >
+                <div className="flex justify-center margin-top-20">
+                    <Pagination totalPage={page} currentPage={parseInt(queryURL.page) || 1} />
+                </div>
+            </div>
+
         </>
     )
 }
@@ -80,38 +97,40 @@ export const ProductItem = (props) => {
             alert("Đã xoá thành công")
             props.del()
         }
-        else{
+        else {
             alert(res.message.error.message)
         }
     }
     return (
-        <div className="col-lg-6">
-            <div className="product flex pad-10">
-                <div className="product_img">
-                    <img src={props.data.imageRepresent[0].url} className="h-100" alt="" />
-                </div>
-                <div className="product_info  flex-grow-3 ">
-                    <div className="brand_name font-weight-bold pad-0-10">
-                        <p> {props.data.brand} </p>
+        <>
+            <div className="col-lg-6">
+                <div className="product flex pad-10">
+                    <div className="product_img">
+                        <img src={props.data.imageRepresent[0].url} className="h-100" alt="" />
                     </div>
-                    <div className="detail">
-                        <p className="name"> {props.data.name} </p>
-                        <p className="money">Giá: <span> {money(props.data?.price)} </span></p>
-                        {/* <p className="quantity">Số lượng tồn: <span className="font-size-15">50</span></p> */}
+                    <div className="product_info  flex-grow-3 ">
+                        <div className="brand_name font-weight-bold pad-0-10">
+                            <p> {props.data.brand} </p>
+                        </div>
+                        <div className="detail">
+                            <p className="name"> {props.data.name} </p>
+                            <p className="money">Giá: <span> {money(props.data?.price)} </span></p>
+                            {/* <p className="quantity">Số lượng tồn: <span className="font-size-15">50</span></p> */}
+                        </div>
                     </div>
-                </div>
-                <div className="product_action flex justify-end-center flex-grow-1">
-                    <div className="product_action-edit pad-10">
-                        <Link className="btn-circle btn-warning " to={`/warehouse-manage/edit/${props.data.slug}`} ><i className="far fa-edit font-size-20" /></Link>
-                    </div>
-                    <div className="product_action-remove pad-10">
-                        <Link onClick={delProduct} className="btn-circle btn-danger" to="#">
-                            <i className="far fa-trash-alt font-size-20" />
-                        </Link>
+                    <div className="product_action flex justify-end-center flex-grow-1">
+                        <div className="product_action-edit pad-10">
+                            <Link className="btn-circle btn-warning " to={`/warehouse-manage/edit/${props.data.slug}`} ><i className="far fa-edit font-size-20" /></Link>
+                        </div>
+                        <div className="product_action-remove pad-10">
+                            <Link onClick={delProduct} className="btn-circle btn-danger" to="#">
+                                <i className="far fa-trash-alt font-size-20" />
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     )
 
 }

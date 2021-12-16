@@ -67,6 +67,23 @@ const mainManageService={
    },
    getListNews(){
        return fetch(`${api}/media/news`).then(res=>res.json())
+   },
+   updateNewsItem(slug,form){
+       return fetch(`${api}/media/news/update/${slug}`,{
+           method:'PUT',
+           headers:{
+               'Content-Type':'application/json'
+           },
+           body:JSON.stringify(form)
+       }).then(res=>res.json())
+   },
+   removeNewsItem(slug){
+       return fetch(`${api}/media/news/delete/${slug}`,{
+           method:'DELETE',
+           headers:{
+               'Content-Type':'application/json'
+           }
+       }).then(res=>res.json())
    }
 
 }

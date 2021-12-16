@@ -32,6 +32,8 @@ body .margin-0 {
   margin: 0;
 }
 
+
+
 body .justify-end-center {
   justify-content: flex-end;
   align-items: center;
@@ -219,4 +221,32 @@ body .voucher_item .voucher_item-icon {
 
 body #dataTable_filter {
   float: right;
+}
+.rdw-image-imagewrapper img{
+  width: 100% !important;
+}
+
+.justify-content-center {
+  justify-content: center!important;
+}
+.d-flex {
+  display: flex!important;
+}
+.text-gray-350[href]:hover, .text-gray-400 {
+  color: #909090!important;
+}
+.pagination {
+  margin-bottom: 0;
+  font-weight: 500;
+}
+.pagination-sm, .table tbody th, .table thead th {
+  font-size: .9375rem;
+}
+.pagination {
+  display: flex;
+  padding-left: 0;
+  list-style: none;
+}
+.text-gray-350[href]:hover, .text-gray-400 {
+  color: #909090!important;
 }
