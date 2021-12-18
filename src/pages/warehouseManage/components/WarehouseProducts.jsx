@@ -1,33 +1,38 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useParams } from "react-router";
 import img from "../../../assets/img/pate.png"
 import wareHouseService from '../../../services/warehouseService'
 import Pagination from '../../../components/Pagination'
 import { convertQueryToObject } from "../../../utils";
+import api from '../../../config/api';
 
 export default function WarehouseProducts() {
 
     let [products, setProducts] = useState()
     let [page, setPage] = useState()
+    let {slug} = useParams()
     let queryURL = convertQueryToObject()
     console.log(`queryURL`, queryURL)
     // console.log(`product`, products)
 
     useEffect(async () => {
-        let res = await wareHouseService.getAllProducts();
+
+        let res = await wareHouseService.getAllProducts(queryURL.page);
+        console.log(`res`, res)
         if (res?.product) {
 
-            setProducts(res.product);
-            setPage(res.pages)
+            await setProducts(res.product);
+            await setPage(res.pages)
         }
-        if (res) console.log(`res`, res)
-    }, [])
+    }, [queryURL.page])
 
     const del = async () => {
         let res = await wareHouseService.getAllProducts();
         if (res?.product) setProducts(res.product)
     }
     // console.log(`products`, products)
+    console.log(`slug`, slug)
     if (!products) return <div className="col-lg-12">Loading...</div>
     return (
         <>

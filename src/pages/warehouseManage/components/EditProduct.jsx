@@ -84,7 +84,7 @@ export default function EditProduct() {
             reader.readAsDataURL(file);
         });
         checkAva.current.disabled=true
-        
+
         // Array.from(ev.target.files).forEach(file=>{
         //     setForm({...form,imageRepresent:file.name})
         // })
@@ -162,7 +162,7 @@ export default function EditProduct() {
                 </div>
                 <div className="form-group">
                     <label> Nhãn Hiệu </label>
-                    <input type="text" className="form-control" disabled defaultValue={detail?.brand?.name} />
+                    <input type="text" className="form-control" disabled defaultValue={detail?.brand} />
                 </div>
                 <div className="form-group">
                     <label htmlFor>Tên Sản Phẩm</label>

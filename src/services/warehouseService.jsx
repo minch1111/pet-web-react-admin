@@ -109,8 +109,13 @@ const wareHouseService={
             body: JSON.stringify(form)
         }).then(res=>res.json())
     },
-    getAllProducts(){
-        return fetch(`${api}/products`).then(res=>res.json())
+    getAllProducts(page){
+        if(!page){
+            return fetch(`${api}/products`).then(res=>res.json())
+        }
+        else{
+            return fetch(`${api}/products?page=${page}`).then(res=>res.json())
+        }
     },
     addNewProduct(form){
         return fetch(`${api}/products/store`,{
@@ -143,9 +148,10 @@ const wareHouseService={
             }
         }).then(res=>res.json())
     },
-    
 
-    
+
+
+
 
 }
 

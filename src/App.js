@@ -12,6 +12,7 @@ import Page404 from "./pages/Page404";
 import authServices from "./services/authServices";
 import MainManage from "./pages/mainManage";
 import Media from "./pages/media";
+import ListOrder from "./pages/staffPay";
 export const Context = createContext();
 
 function App() {
@@ -65,9 +66,9 @@ function App() {
                     />
                     <PrivateRoute path="/main-manager" component={MainManage} />
                     <PrivateRoute path="/media" component={Media} />
+                    <PrivateRoute path="/staff" component={ListOrder} />
                     <PrivateRoute>
-                      {" "}
-                      <Page404 />{" "}
+                      <Page404 />
                     </PrivateRoute>
                   </Switch>
                   {/* <WareHouseManage /> */}
@@ -81,10 +82,10 @@ function App() {
 
       {/* <Nav />
       <div id="content-wrapper" className="d-flex flex-column">
-        
+
         <div id="content">
           <Header />
-          
+
           <Home />
           <Footer />
         </div>

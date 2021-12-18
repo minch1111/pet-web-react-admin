@@ -112,7 +112,7 @@ export const VoucherItem = (props) => {
             <div className="voucher_item shadow">
                 <div className="voucher_item-info flex  ">
                     <div className={
-                        props.index % 2 == 0 ? "voucher_item-img flex justify-center flex-align-center pad-10 background-darkgreen txt-center" :
+                        props.data.typeVoucher === "Voucher Store" ? "voucher_item-img flex justify-center flex-align-center pad-10 background-darkgreen txt-center" :
                             "voucher_item-img flex justify-center flex-align-center pad-10 background-darkorange txt-center"
                     }>
                         <p className="text-uppercase" style={{ color: 'white' }}> {props.data.title} </p>
@@ -164,6 +164,10 @@ export const AddVoucher = (props) => {
     //         // console.log(`value`, date)
     //     }
 
+    useEffect(async ()=>{
+        let res = await mainManagerService
+    },[])
+
     const submit = async () => {
         console.log(`form`, form)
         let res = await mainManagerService.addNewVoucher(form)
@@ -193,6 +197,19 @@ export const AddVoucher = (props) => {
                             {
                                 error.name && <small className="text-danger" > {error.name} </small>
                             }
+                        </div>
+
+                        <div class="form-group">
+                            <label> Loại voucher </label>
+                            <select class="form-control" {...register('typeVoucher',{required:true})} >
+                                <option value=''>Chọn loại khuyến mãi</option>
+                                <option value="Voucher Ship"> Khuyến mãi vận chuyển </option>
+                                <option value="Voucher Store" > Khuyến mãi cửa hàng </option>
+                            </select>
+                            {
+                                error.typeVoucher && <small className='text-danger'> {error.typeVoucher} </small>
+                            }
+
                         </div>
                         <div className="form-group">
                             <label >Ngày bắt đầu</label>
@@ -285,6 +302,14 @@ export const EditVoucher = (props) => {
                         <div className="form-group">
                             <label >Tên Voucher</label>
                             <input type="text" className="form-control" {...register('name', { required: true })} placeholder="Nhập tên voucher..." />
+                        </div>
+                        <div class="form-group">
+                          <label > Loại voucher</label>
+                          <select class="form-control" {...register('typeVoucher')} disabled>
+                            <option value="">Chọn loại khuyến mãi</option>
+                            <option value="Voucher Ship"> Khuyến mãi vận chuyển </option>
+                            <option value="Voucher Store"> Khuyến mãi cửa hàng </option>
+                          </select>
                         </div>
 
                         <div className="form-group">
