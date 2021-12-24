@@ -250,3 +250,6 @@ body #dataTable_filter {
 .text-gray-350[href]:hover, .text-gray-400 {
   color: #909090!important;
 }
+.dataTables_filter{
+  float: right !important;
+}

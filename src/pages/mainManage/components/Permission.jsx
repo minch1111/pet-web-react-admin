@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Table from 'react-bootstrap/Table'
 import mainManageService from '../../../services/mainManagerService'
+let $ = window.$
 
 export default function Permission() {
     let [showEdit, setShowEdit] = useState(false)
@@ -24,6 +25,11 @@ export default function Permission() {
     useEffect(async () => {
         let res = await mainManageService.getAllPermissions();
         await setListPermission(res.permission)
+        $(document).ready(function () {
+            $('#dataTable1').DataTable({
+              // "dom": '<"toolbar">frtip'
+            });
+          });
     }, [])
     if (!listPermission) return <div className="col-lg-12 flex justify-center">Loading...</div>
     return (
@@ -45,7 +51,7 @@ export default function Permission() {
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <table class="table table-bordered" id="dataTable2" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
                                         <th>#</th>

@@ -8,19 +8,19 @@ import Vouchers from './components/Vouchers'
 
 export default function MainManage() {
     return (
-        <div className="container">
+        <div className="container-fluid">
             <div className="row">
                 <Switch>
                     <Route path="/main-manager/report" exact component={ReportSale} />
                     <Route path="/main-manager/report/:slug" exact component={ReportDetailMonth} />
 
-                    <Route path="/main-manager/staffs" exact component={ListStaff} /> 
+                    <Route path="/main-manager/staffs" exact component={ListStaff} />
 
                     <Route path="/main-manager/vouchers" exact component={Vouchers} />
 
                     <Route path="/main-manager/permission" exact component={Permission} />
                 </Switch>
-                
+
             </div>
         </div>
     )

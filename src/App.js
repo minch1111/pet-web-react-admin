@@ -60,10 +60,7 @@ function App() {
                   <Header />
                   <Switch>
                     <PrivateRoute exact path="/" component={Home} />
-                    <PrivateRoute
-                      path="/warehouse-manage"
-                      component={WareHouseManage}
-                    />
+                    <PrivateRoute path="/warehouse-manage" component={WareHouseManage}/>
                     <PrivateRoute path="/main-manager" component={MainManage} />
                     <PrivateRoute path="/media" component={Media} />
                     <PrivateRoute path="/staff" component={ListOrder} />

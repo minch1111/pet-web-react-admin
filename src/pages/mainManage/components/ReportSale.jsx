@@ -1,60 +1,19 @@
-import React from 'react'
+import React, { useState ,useEffect} from 'react'
 import { Link } from 'react-router-dom'
+import useForm from "../../../hooks/useForm"
+import mainManageService from '../../../services/mainManagerService'
+
+
 
 export default function ReportSale() {
-    const sale = [
-        {
-
-            month: "10",
-            year: "2021",
-            slug: "thang-10",
-            saled:
-                [
-                    {
-                        date: "23",
-                        productSaled: [
-                            {
-                                name: "Pet Choy đồ ăn cho chó",
-                                price: 50000,
-                                num: 2,
-                            },
-                            {
-                                name: "Pet Choy đồ ăn cho cá",
-                                price: 10000,
-                                num: 3,
-                            }
-                        ]
-                    },
-                    {
-                        date: "24",
-                        productSaled: [
-                            {
-                                name: "Pet Choy đồ ăn cho chó",
-                                price: 50000,
-                                num: 3,
-                            },
-                            {
-                                name: "Pet Choy đồ ăn cho cá",
-                                price: 10000,
-                                num: 3,
-                            }
-                        ]
-                    }
-                ],
-
-
-        },
-        {
-
-            month: "11",
-            year: "2021",
-            saled: [
-            ]
-
-        },
-    ]
-
-
+    const [showAdd, setShowAdd] = useState(true)
+    const [listReport,setListReport]=useState()
+    useEffect(async () => {
+        let res = await mainManageService.getAllReport()
+        if(res.success){
+            setListReport(res.reports)
+        }
+    }, [])
 
     return (
         <>
@@ -79,26 +38,62 @@ export default function ReportSale() {
                     </div>
                 </div>
             </div>
+
+
             {
-                sale.map((o, i) => (
+                listReport&&listReport.map((o,i)=>(
                     <div className="col-lg-4" key={i}>
-                        <div className="month_report">
-                            <div className="month pad-10">
-                                <h3>Tháng {o.month}</h3>
-                                <h5>Năm {o.year}</h5>
-                            </div>
-                            <div className="month_report-action pad-20">
-                                <Link className="btn-circle btn-primary product_action-edit margin-0-20 " to={{ pathname: `/main-manager/report/${o.slug}`, querry: { data: o.saled } }}>
-                                    <i className="fas fa-eye font-size-20"></i>
-                                </Link>
-                                <Link to="#" className="btn-circle btn-danger product_action-remove margin-0-20">
-                                    <i className="far fa-trash-alt font-size-20" />
-                                </Link>
-                            </div>
-                        </div>
+                <div className="month_report">
+                    <div className="month pad-10">
+                        <h3>Tháng {o.month}</h3>
+                        <h5>Năm {o.year} </h5>
                     </div>
+                    <div className="month_report-action pad-20">
+                        <Link className="btn-circle btn-primary product_action-edit margin-0-20 " to={`/main-manager/report/${o._id}`}>
+                            <i className="fas fa-eye font-size-20"></i>
+                        </Link>
+                        <Link to="#" className="btn-circle btn-danger product_action-remove margin-0-20">
+                            <i className="far fa-trash-alt font-size-20" />
+                        </Link>
+                    </div>
+                </div>
+            </div>
                 ))
             }
+
+            {
+                showAdd && <AddReport />
+
+            }
+
+
         </>
+    )
+}
+
+export const AddReport = () => {
+
+    let { form, error, handleSubmit, register } = useForm()
+    const submit =async ()=>{
+        let res = await mainManageService.addNewReport(form);
+
+    }
+    return (
+        <div className="col">
+            <div class="card">
+                <form onSubmit={handleSubmit(submit)} class="card-body">
+                    <h3 class="card-title">Thêm mới doanh thu</h3>
+                    <div class="form-group">
+                        <label for="date">Chọn tháng báo cáo</label>
+                        <input type="month" {...register('monthYear', { required: true })} id="date" class="form-control" />
+                        {
+                            error.monthYear && <small className='text-error'> {error.monthYear} </small>
+                        }
+                        {/* <small id="helpId" class="text-muted">Help text</small> */}
+                    </div>
+                    <button type='submit' className='btn btn-success'> Thêm </button>
+                </form>
+            </div>
+        </div>
     )
 }

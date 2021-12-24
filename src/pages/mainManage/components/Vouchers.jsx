@@ -275,7 +275,7 @@ export const EditVoucher = (props) => {
         setForm(props.voucher)
     }, [props.voucher])
     // console.log(`form`, form)
-
+    console.log(`form`, form)
     const submit = async () => {
         // console.log(`form`, form)
         let res = await mainManagerService.updateVoucher(form._id, form);
