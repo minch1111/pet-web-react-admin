@@ -44,7 +44,7 @@ function App() {
     setUser(localStorage.getItem("loginAdmin"));
     setLoginError();
   };
-console.log(`user`, user.idPermission)
+// console.log(`user`, user.idPermission)
 
   return (
     <div id="wrapper" className="App">
@@ -63,7 +63,7 @@ console.log(`user`, user.idPermission)
                   <Header />
                   <Switch>
                     <PrivateRoute exact path="/" component={Home} />
-                    <Route path="/warehouse-manage" component={WareHouseManage}/>
+                    <PrivateRoute path="/warehouse-manage" component={WareHouseManage}/>
                     <PrivateRoute path="/main-manager" component={MainManage} />
                     <PrivateRoute path="/media" component={Media} />
                     <PrivateRoute path="/staff" exact component={ListOrder} />

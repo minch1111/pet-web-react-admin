@@ -18,8 +18,8 @@ export default function ListStaff() {
         await setStaff(res?.user)
         await setListPer(res1?.permission)
         $(document).ready(function () {
-            $('#dataTable4').DataTable({
-                "dom": '<"toolbar">frtip'
+            $('#dataTableeee').DataTable({
+                // "dom": '<"toolbar">frtip'
             });
         });
     }, [])
@@ -75,7 +75,7 @@ export default function ListStaff() {
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable4" width="100%" cellspacing="0">
+                            <table class="table table-bordered" id="dataTableeee" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
                                         <th>#</th>
@@ -302,22 +302,39 @@ export const AddStaff = (props) => {
 }
 
 export const Staff = (props) => {
+    let notify = useRef()
+    var options = {};
+    options = {
+        place: 'tr',
+        message: (
+            <div>
+                Đã xoá thành công {props.data.name} 😄😄😄
+            </div>
+        ),
+        type: "success",
+        icon:'far fa-check-circle',
+        autoDismiss: 4,
+        closeButton:false
+    }
     const del = async () => {
         let res = await mainManageService.removeStaff(props.data._id)
         if (res.success) {
-            alert('đã xoá thành công ' + props.data.name);
+            // alert('đã xoá thành công ' + props.data.name);
+            notify.current.notificationAlert(options)
             props.loadAfterEdit()
         }
     }
     return (
+
         <tr>
+            <NotificationAlert ref={notify} />
             <td> {props.number} </td>
             <td> {props.data.name} </td>
             <td> {props.data.username} </td>
             <td> {props.data.Role} </td>
             <td> {props.data.email} </td>
             <td className="text-center"><Link to="#" className="btn-circle btn-warning " onClick={() => { props.showEditForm(props.data) }} ><i className="far fa-edit font-size-20" /></Link></td>
-            <td className="text-center" ><a href="#" className="btn-circle btn-danger" onClick={() => { del() }} ><i className="far fa-trash-alt font-size-20" /></a></td>
+            <td className="text-center" ><Link to="#" className="btn-circle btn-danger" onClick={() => { del() }} ><i className="far fa-trash-alt font-size-20" /></Link></td>
         </tr>
     )
 }
