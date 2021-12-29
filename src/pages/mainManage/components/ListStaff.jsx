@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import mainManageService from '../../../services/mainManagerService'
 import useForm from "../../../hooks/useForm"
+import NotificationAlert from 'react-notification-alert'
 let $ = window.$
 
 export default function ListStaff() {
@@ -17,7 +18,7 @@ export default function ListStaff() {
         await setStaff(res?.user)
         await setListPer(res1?.permission)
         $(document).ready(function () {
-            $('#dataTable').DataTable({
+            $('#dataTable4').DataTable({
                 "dom": '<"toolbar">frtip'
             });
         });
@@ -74,7 +75,7 @@ export default function ListStaff() {
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <table class="table table-bordered" id="dataTable4" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
                                         <th>#</th>
@@ -122,7 +123,20 @@ export default function ListStaff() {
 }
 
 export const EditStaff = (props) => {
-
+    let notify = useRef()
+    var options = {};
+    options = {
+        place: 'tr',
+        message: (
+            <div>
+                Đã cập nhật thành công  😄😄😄
+            </div>
+        ),
+        type: "success",
+        icon:'far fa-check-circle',
+        autoDismiss: 4,
+        closeButton:false
+    }
     // console.log(`props.user`, props.user)
     let { form, error, handleSubmit, register, setForm } = useForm()
     useEffect(() => {
@@ -135,13 +149,15 @@ export const EditStaff = (props) => {
         console.log(`form`, form)
         let res = await mainManageService.updatePermissionStaff(form._id, form)
         if (res.success) {
-            alert('Cập nhật thành công 😄');
+            // alert('Cập nhật thành công 😄');
+            notify.current.notificationAlert(options)
             props.loadAfterEdit()
         }
     }
 
     return (
-        <div className="col-md-3 col-6 col-lg-3" >
+        <div className="col-md-4 col-6 col-lg-4" >
+            <NotificationAlert ref={notify} />
             <div className="card w-100">
                 <img className="card-img-top h-200px" src="/img/male-profile-picture-vector-1862205.jpg" alt="Card image cap" />
                 <div className="card-body">
@@ -177,17 +193,35 @@ export const EditStaff = (props) => {
 }
 
 export const AddStaff = (props) => {
+    let notify = useRef()
     let { form, error, handleSubmit, register } = useForm()
+    var options = {};
+    options = {
+        place: 'tr',
+        message: (
+            <div>
+                Đã thêm thành công tài khoản {form.name} 😄😄😄
+            </div>
+        ),
+        type: "success",
+        icon:'far fa-check-circle',
+        autoDismiss: 7
+    }
     const submit = async () => {
         console.log(`form`, form)
         let res = await mainManageService.addNewStaff(form)
         if (res.success) {
-            alert('Đã thêm thành công ' + form.name);
+            // alert('Đã thêm thành công ' + form.name);
+            notify.current.notificationAlert(options)
             props.loadAfterEdit()
         }
     }
+
     return (
         <div className="col-md-4">
+            <NotificationAlert
+                ref={notify}
+            />
             <div className="card w-100">
                 {/* <img className="card-img-top h-200px" src="/img/male-profile-picture-vector-1862205.jpg" alt="Card image cap" /> */}
                 <div className="card-body">
@@ -283,7 +317,7 @@ export const Staff = (props) => {
             <td> {props.data.Role} </td>
             <td> {props.data.email} </td>
             <td className="text-center"><Link to="#" className="btn-circle btn-warning " onClick={() => { props.showEditForm(props.data) }} ><i className="far fa-edit font-size-20" /></Link></td>
-            <td className="text-center" ><a href="#" className="btn-circle btn-danger" onClick={() => {del()}} ><i className="far fa-trash-alt font-size-20" /></a></td>
+            <td className="text-center" ><a href="#" className="btn-circle btn-danger" onClick={() => { del() }} ><i className="far fa-trash-alt font-size-20" /></a></td>
         </tr>
     )
 }

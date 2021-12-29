@@ -5,11 +5,7 @@ import { convertObjectToQuery } from '../utils';
 import { convertQueryToObject } from '../utils';
 
 export default function Pagination({ totalPage, currentPage = 1 }) {
-
-
-
     let { path, url } = useRouteMatch();
-
     function renderPage() {
         if (totalPage === 1) return []
 
@@ -24,7 +20,6 @@ export default function Pagination({ totalPage, currentPage = 1 }) {
 
             if (start < 1) start = 1
         }
-
         let list = []
         for (let i = start; i <= end; i++) {
             let queryURL = convertQueryToObject()
@@ -37,11 +32,7 @@ export default function Pagination({ totalPage, currentPage = 1 }) {
         }
         return list
     }
-
-
-
     let objURL = convertQueryToObject();
-
     return (
         <nav className="d-flex justify-content-center justify-content-md-end">
             <ul className="pagination pagination-sm text-gray-400">
