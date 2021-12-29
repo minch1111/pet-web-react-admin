@@ -13,6 +13,7 @@ import authServices from "./services/authServices";
 import MainManage from "./pages/mainManage";
 import Media from "./pages/media";
 import ListOrder from "./pages/staffPay";
+import OrderDetail from "./pages/staffPay/OrderDetail";
 export const Context = createContext();
 
 function App() {
@@ -43,6 +44,8 @@ function App() {
     setUser(localStorage.getItem("loginAdmin"));
     setLoginError();
   };
+console.log(`user`, user.idPermission)
+
   return (
     <div id="wrapper" className="App">
       {/* <Login /> */}
@@ -60,10 +63,11 @@ function App() {
                   <Header />
                   <Switch>
                     <PrivateRoute exact path="/" component={Home} />
-                    <PrivateRoute path="/warehouse-manage" component={WareHouseManage}/>
+                    <Route path="/warehouse-manage" component={WareHouseManage}/>
                     <PrivateRoute path="/main-manager" component={MainManage} />
                     <PrivateRoute path="/media" component={Media} />
-                    <PrivateRoute path="/staff" component={ListOrder} />
+                    <PrivateRoute path="/staff" exact component={ListOrder} />
+                    <PrivateRoute path="/staff/:slug" component={OrderDetail} />
                     <PrivateRoute>
                       <Page404 />
                     </PrivateRoute>

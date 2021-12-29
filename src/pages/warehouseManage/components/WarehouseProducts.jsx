@@ -108,7 +108,7 @@ export const ProductItem = (props) => {
     }
     return (
         <>
-            <div className="col-lg-6">
+            <div className="col-lg-6 mb-2">
                 <div className="product flex pad-10">
                     <div className="product_img">
                         <img src={props.data.imageRepresent[0].url} className="h-100" alt="" />

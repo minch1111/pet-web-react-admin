@@ -82,7 +82,7 @@ export default function ListOrder() {
                         key={i}
                         number={i}
                         data={o}
-                        confirmOrder={(idOrder) => confirmOrder(idOrder)}
+                        // confirmOrder={(idOrder) => confirmOrder(idOrder)}
                       // setNewsToEdit={(data) => setNewsToEdit(data)}
                       // loadAfterAction={() => loadAfterAction()}
                       />
@@ -120,7 +120,7 @@ export const OrderItem = (props) => {
       <td> {props?.data?.name} </td>
       <td> {props?.data?.Staff} </td>
       <td> {props?.data?.status}</td>
-      <td className='text-center'> {props?.data?.status === "Chờ xác nhận" ? <Link to="#" className='btn-circle btn-warning' onClick={() => { props.confirmOrder(props.data._id) }}><i class="fas fa-check"></i></Link> : <Link to="#" className='btn-circle btn-success '><i class="fas fa-check"></i></Link>} </td>
+      <td className='text-center'> {props?.data?.status === "Chờ xác nhận" ? <Link to={`/staff/${props.data._id}`} className='btn-circle btn-warning' ><i class="fas fa-check"></i></Link> : <Link to={`/staff/${props.data._id}`} className='btn-circle btn-success '><i class="fas fa-check"></i></Link>} </td>
       <td> {props?.data?.dateOrder} </td>
       <td> {money(props?.data?.totalPrice)} </td>
       {/* <td className="text-center"><Link to="#" className="btn-circle btn-warning " ><i className="far fa-edit font-size-20" /></Link></td>

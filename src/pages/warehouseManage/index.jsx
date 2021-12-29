@@ -1,9 +1,10 @@
-import React from 'react'
+import React,{useContext} from 'react'
 import AddProduct from './components/AddProduct'
 import WarehouseProducts from './components/WarehouseProducts'
 import {
     Switch,
-    Route
+    Route,
+    Redirect
 } from 'react-router-dom'
 import EditProduct from './components/EditProduct'
 import Brand from './components/Brand'
@@ -13,9 +14,13 @@ import Category from './components/Category'
 import AddNewCategory from './components/AddCategory'
 import AddSubCategory from './components/AddSubCategory'
 import EditCategory from './components/EditCategory'
+import { Context } from '../../App'
+
 
 export default function WareHouseManage() {
     // console.log(`object`)
+    let {user} = useContext(Context);
+    if(user.idPermission!=='619dde04a858f214302c5d5c' && user.idPermission!=='61aed3c47812fa068eee6d4f') return <Redirect to="/" />
     return (
         <div className="container">
             <div className="row">

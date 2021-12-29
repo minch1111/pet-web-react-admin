@@ -111,6 +111,9 @@ const mainManageService = {
     },
     getReportByIdMonth(id){
         return fetch(`${api}/order/staff/statistical/${id}`).then(res=>res.json())
+    },
+    getOrderDetail(id){
+        return fetch(`${api}/order/staff/detail/${id}`).then(res=>res.json())
     }
 
 }
