@@ -327,7 +327,6 @@ export const Staff = (props) => {
     return (
 
         <tr>
-            <NotificationAlert ref={notify} />
             <td> {props.number} </td>
             <td> {props.data.name} </td>
             <td> {props.data.username} </td>
@@ -335,6 +334,7 @@ export const Staff = (props) => {
             <td> {props.data.email} </td>
             <td className="text-center"><Link to="#" className="btn-circle btn-warning " onClick={() => { props.showEditForm(props.data) }} ><i className="far fa-edit font-size-20" /></Link></td>
             <td className="text-center" ><Link to="#" className="btn-circle btn-danger" onClick={() => { del() }} ><i className="far fa-trash-alt font-size-20" /></Link></td>
+            <NotificationAlert ref={notify} />
         </tr>
     )
 }

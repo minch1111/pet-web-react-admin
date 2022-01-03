@@ -1,11 +1,45 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useRef } from 'react'
+import {Line} from 'react-chartjs-2'
+import {CategoryScale} from 'chart.js'
+import Chart from 'chart.js/auto'
 
 export default function Home() {
+    let chart = useRef()
+    const data = {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July','August','September','October','November','December'],
+        datasets: [
+          {
+            label: 'My First dataset',
+            fill: false,
+            lineTension: 0.1,
+            backgroundColor: 'rgba(75,192,192,0.4)',
+            borderColor: 'rgba(75,192,192,1)',
+            borderCapStyle: 'butt',
+            borderDash: [],
+            borderDashOffset: 0.0,
+            borderJoinStyle: 'miter',
+            pointBorderColor: 'rgba(75,192,192,1)',
+            pointBackgroundColor: '#fff',
+            pointBorderWidth: 1,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+            pointHoverBorderColor: 'rgba(220,220,220,1)',
+            pointHoverBorderWidth: 2,
+            pointRadius: 1,
+            pointHitRadius: 10,
+            data: [65, 59, 80, 81, 56, 55, 48]
+          }
+        ]
+      };
+    //   useEffect(()=>{
+    //       const {datasets} = this.refs.chart.chartInstance.data
+    //   },[])
     return (
         <div className="container-fluid">
             {/* Page Heading */}
             <div className="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 className="h3 mb-0 text-gray-800">Dashboard</h1>
+                <h1 className="h3 mb-0 text-gray-800">Thống kê</h1>
                 <a href="#" className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i className="fas fa-download fa-sm text-white-50" /> Generate Report</a>
             </div>
             {/* Content Row */}
@@ -112,7 +146,8 @@ export default function Home() {
                         {/* Card Body */}
                         <div className="card-body">
                             <div className="chart-area">
-                                <canvas id="myAreaChart" />
+                                {/* <canvas id="myAreaChart" /> */}
+                                <Line ref={chart} data={data} />
                             </div>
                         </div>
                     </div>
@@ -291,3 +326,12 @@ export default function Home() {
         </div>
     )
 }
+
+// export const chartArea =()=>{
+
+//     return (
+//         <div>
+
+//         </div>
+//     )
+// }

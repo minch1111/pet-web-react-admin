@@ -6,6 +6,7 @@ import wareHouseService from '../../../services/warehouseService'
 import Pagination from '../../../components/Pagination'
 import { convertQueryToObject } from "../../../utils";
 import api from '../../../config/api';
+let $ =window.$
 
 export default function WarehouseProducts() {
 
@@ -32,6 +33,7 @@ export default function WarehouseProducts() {
         if (res?.product) setProducts(res.product)
     }
     // console.log(`products`, products)
+
     console.log(`slug`, slug)
     if (!products) return <div className="col-lg-12">Loading...</div>
     return (
@@ -57,10 +59,10 @@ export default function WarehouseProducts() {
                     </div>
                     <div className="multi-search">
                         <div className="dropdown">
-                            <button className="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown">
+                            <button className="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"  >
                                 Lọc tìm kiếm
                             </button>
-                            <div className="dropdown-menu left--100" aria-labelledby="dropdownMenuButton">
+                            <div className="dropdown-menu left--100" aria-labelledby="dropdownMenuButton" id='dropdow-menu'>
                                 <a className="dropdown-item" href="#">Theo giá</a>
                                 <a className="dropdown-item" href="#"> Theo số lượng</a>
                                 <a className="dropdown-item" href="#">Theo tên</a>
