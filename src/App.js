@@ -14,6 +14,7 @@ import MainManage from "./pages/mainManage";
 import Media from "./pages/media";
 import ListOrder from "./pages/staffPay";
 import OrderDetail from "./pages/staffPay/OrderDetail";
+import Rate from "./pages/media/Rate";
 export const Context = createContext();
 
 function App() {
@@ -68,6 +69,7 @@ function App() {
                     <PrivateRoute path="/media" component={Media} />
                     <PrivateRoute path="/staff" exact component={ListOrder} />
                     <PrivateRoute path="/staff/:slug" component={OrderDetail} />
+                    <PrivateRoute path="/rate" component={Rate} />
                     <PrivateRoute>
                       <Page404 />
                     </PrivateRoute>

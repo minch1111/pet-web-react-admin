@@ -97,23 +97,35 @@ const mainManageService = {
             body: JSON.stringify(staff)
         }).then(res => res.json())
     },
-    addNewReport(form){
-        return fetch(`${api}/order/staff/statistical/store`,{
-            method:'POST',
-            headers:{
-                'Content-Type':'application/json'
+    addNewReport(form) {
+        return fetch(`${api}/order/staff/statistical/store`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
             },
-            body : JSON.stringify(form)
-        }).then(res=>res.json())
+            body: JSON.stringify(form)
+        }).then(res => res.json())
     },
-    getAllReport(){
-        return fetch(`${api}/order/staff/statistical`).then(res=>res.json())
+    getAllReport() {
+        return fetch(`${api}/order/staff/statistical`).then(res => res.json())
     },
-    getReportByIdMonth(id){
-        return fetch(`${api}/order/staff/statistical/${id}`).then(res=>res.json())
+    getReportByIdMonth(id) {
+        return fetch(`${api}/order/staff/statistical/${id}`).then(res => res.json())
     },
-    getOrderDetail(id){
-        return fetch(`${api}/order/staff/detail/${id}`).then(res=>res.json())
+    getOrderDetail(id) {
+        return fetch(`${api}/order/staff/detail/${id}`).then(res => res.json())
+    },
+    getListRate() {
+        return fetch(`${api}/media/rate`).then(res => res.json())
+    },
+    repRate(id, form) {
+        return fetch(`${api}/media/rate/rep/${id} `, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(form)
+        }).then(res => res.json())
     }
 
 }
