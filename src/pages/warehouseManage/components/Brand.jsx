@@ -49,7 +49,7 @@ export default function Brand() {
                             Thêm mới nhãn hiệu
                         </Link>
                     </div>
-                    <div>
+                    {/* <div>
                         <form className="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                             <div className="input-group">
                                 <input type="text" className="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
@@ -60,7 +60,7 @@ export default function Brand() {
                                 </div>
                             </div>
                         </form>
-                    </div>
+                    </div> */}
                     <div className="form-group">
                         <select class="form-select form-control" onChange={handleChange} >
                             <option selected value="">Tìm kiếm theo danh mục</option>

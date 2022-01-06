@@ -41,7 +41,7 @@ export default function ListOrder() {
                             Thêm mới Bài Viết
                         </div>
                     </div> */}
-          <div className="multi-search">
+          {/* <div className="multi-search">
             <div className="dropdown">
               <button className="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown">
                 Dropdown button
@@ -52,7 +52,7 @@ export default function ListOrder() {
                 <a className="dropdown-item" href="#">Something else here</a>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
       <div className="col">

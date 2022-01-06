@@ -54,7 +54,7 @@ export default function ListStaff() {
                             Thêm mới nhân viên
                         </div>
                     </div>
-                    <div className="multi-search">
+                    {/* <div className="multi-search">
                         <div className="dropdown">
                             <button className="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown">
                                 Dropdown button
@@ -65,7 +65,7 @@ export default function ListStaff() {
                                 <a className="dropdown-item" href="#">Something else here</a>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
             <div className="col">
