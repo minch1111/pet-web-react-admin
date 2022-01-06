@@ -91,7 +91,7 @@ export default function Nav() {
                             <div className="bg-white py-2 collapse-inner rounded">
                                 <h6 className="collapse-header">Tasks:</h6>
                                 <Link className="collapse-item" to="/media">Bài Đăng</Link>
-                                <Link className="collapse-item" to="#"> Đánh giá </Link>
+                                <Link className="collapse-item" to="/rate"> Đánh giá </Link>
                             </div>
                         </div>
                     </div>

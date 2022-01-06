@@ -118,6 +118,9 @@ const mainManageService = {
     getListRate() {
         return fetch(`${api}/media/rate`).then(res => res.json())
     },
+    getRateDetailById(id){
+        return fetch(`${api}/media/rate/${id}`).then(res=>res.json())
+    },
     repRate(id, form) {
         return fetch(`${api}/media/rate/rep/${id} `, {
             method: 'POST',
@@ -126,6 +129,23 @@ const mainManageService = {
             },
             body: JSON.stringify(form)
         }).then(res => res.json())
+    },
+    removeRepRate(id){
+        return fetch(`${api}/media/rate/delete/${id}`,{
+            method:'DELETE',
+            headers:{
+                'Content-Type':'application/json'
+            }
+        }).then(res=>res.json())
+    },
+    updateRepRate(id,form){
+        return fetch(`${api}/media/rate/update/${id}`,{
+            method:'PUT',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify(form)
+        }).then(res=>res.json())
     }
 
 }
