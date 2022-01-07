@@ -10,15 +10,6 @@ export default function ListCustomer() {
   console.log(`customers`, customers)
   return (
     <>
-      <div className="col-lg-12">
-        <div className="activities flex justify-between margin-bottom-20">
-          <div className="addStaff">
-            <div className="btn btn-warning" >
-              Thêm mới khách hàng
-            </div>
-          </div>
-        </div>
-      </div>
       <div className="col">
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
