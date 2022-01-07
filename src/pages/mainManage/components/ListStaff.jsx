@@ -133,9 +133,9 @@ export const EditStaff = (props) => {
             </div>
         ),
         type: "success",
-        icon:'far fa-check-circle',
+        icon: 'far fa-check-circle',
         autoDismiss: 4,
-        closeButton:false
+        closeButton: false
     }
     // console.log(`props.user`, props.user)
     let { form, error, handleSubmit, register, setForm } = useForm()
@@ -204,7 +204,7 @@ export const AddStaff = (props) => {
             </div>
         ),
         type: "success",
-        icon:'far fa-check-circle',
+        icon: 'far fa-check-circle',
         autoDismiss: 7
     }
     const submit = async () => {
@@ -312,9 +312,9 @@ export const Staff = (props) => {
             </div>
         ),
         type: "success",
-        icon:'far fa-check-circle',
+        icon: 'far fa-check-circle',
         autoDismiss: 4,
-        closeButton:false
+        closeButton: false
     }
     const del = async () => {
         let res = await mainManageService.removeStaff(props.data._id)

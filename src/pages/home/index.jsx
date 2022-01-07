@@ -1,16 +1,18 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useRef } from 'react'
 import {Line} from 'react-chartjs-2'
 import {CategoryScale} from 'chart.js'
 import Chart from 'chart.js/auto'
+import mainManagerService from '../../services/mainManagerService'
 
 export default function Home() {
+    let [statical,setStatical]=useState()
     let chart = useRef()
     const data = {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July','August','September','October','November','December'],
+        labels: statical?.statistical.map((o,i)=>{return  o._id.month +" / "+o._id.year}),
         datasets: [
           {
-            label: 'My First dataset',
+            label: 'Báo cáo doanh thu theo tháng',
             fill: false,
             lineTension: 0.1,
             backgroundColor: 'rgba(75,192,192,0.4)',
@@ -28,13 +30,17 @@ export default function Home() {
             pointHoverBorderWidth: 2,
             pointRadius: 1,
             pointHitRadius: 10,
-            data: [65, 59, 80, 81, 56, 55, 48]
+            data: statical?.statistical.map((o,i)=>{return o.order})
           }
         ]
       };
-    //   useEffect(()=>{
-    //       const {datasets} = this.refs.chart.chartInstance.data
-    //   },[])
+
+      useEffect(async ()=>{
+          let res = await mainManagerService.home()
+          await setStatical(res)
+      },[])
+      console.log(`statical`, statical)
+      console.log(`month`, statical?.statistical[0]._id.month)
     return (
         <div className="container-fluid">
             {/* Page Heading */}
@@ -51,11 +57,11 @@ export default function Home() {
                             <div className="row no-gutters align-items-center">
                                 <div className="col mr-2">
                                     <div className="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                        Earnings (Monthly)</div>
-                                    <div className="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+                                        Tin Tức</div>
+                                    <div className="h5 mb-0 font-weight-bold text-gray-800"> {statical?.news} </div>
                                 </div>
                                 <div className="col-auto">
-                                    <i className="fas fa-calendar fa-2x text-gray-300" />
+                                    <i className="far fa-newspaper fa-2x text-gray-300" />
                                 </div>
                             </div>
                         </div>
@@ -68,8 +74,8 @@ export default function Home() {
                             <div className="row no-gutters align-items-center">
                                 <div className="col mr-2">
                                     <div className="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                        Earnings (Annual)</div>
-                                    <div className="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+                                        Hoá Đơn</div>
+                                    <div className="h5 mb-0 font-weight-bold text-gray-800"> {statical?.order} </div>
                                 </div>
                                 <div className="col-auto">
                                     <i className="fas fa-dollar-sign fa-2x text-gray-300" />
@@ -78,8 +84,24 @@ export default function Home() {
                         </div>
                     </div>
                 </div>
-                {/* Earnings (Monthly) Card Example */}
                 <div className="col-xl-3 col-md-6 mb-4">
+                    <div className="card border-left-info shadow h-100 py-2">
+                        <div className="card-body">
+                            <div className="row no-gutters align-items-center">
+                                <div className="col mr-2">
+                                    <div className="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                        Sản phẩm</div>
+                                    <div className="h5 mb-0 font-weight-bold text-gray-800"> {statical?.product} </div>
+                                </div>
+                                <div className="col-auto">
+                                    <i className="fas fa-boxes fa-2x text-gray-300" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {/* Earnings (Monthly) Card Example */}
+                {/* <div className="col-xl-3 col-md-6 mb-4">
                     <div className="card border-left-info shadow h-100 py-2">
                         <div className="card-body">
                             <div className="row no-gutters align-items-center">
@@ -103,7 +125,7 @@ export default function Home() {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
                 {/* Pending Requests Card Example */}
                 <div className="col-xl-3 col-md-6 mb-4">
                     <div className="card border-left-warning shadow h-100 py-2">
@@ -111,11 +133,11 @@ export default function Home() {
                             <div className="row no-gutters align-items-center">
                                 <div className="col mr-2">
                                     <div className="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                        Pending Requests</div>
-                                    <div className="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                                        Nhân Viên </div>
+                                    <div className="h5 mb-0 font-weight-bold text-gray-800"> {statical?.staff} </div>
                                 </div>
                                 <div className="col-auto">
-                                    <i className="fas fa-comments fa-2x text-gray-300" />
+                                    <i className="fas fa-users fa-2x text-gray-300" />
                                 </div>
                             </div>
                         </div>
@@ -125,12 +147,12 @@ export default function Home() {
             {/* Content Row */}
             <div className="row">
                 {/* Area Chart */}
-                <div className="col-xl-8 col-lg-7">
+                <div className="col-xl-8 col-lg-8">
                     <div className="card shadow mb-4">
                         {/* Card Header - Dropdown */}
                         <div className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                            <h6 className="m-0 font-weight-bold text-primary">Earnings Overview</h6>
-                            <div className="dropdown no-arrow">
+                            <h6 className="m-0 font-weight-bold text-primary"> Thống kê doanh thu theo Tháng </h6>
+                            {/* <div className="dropdown no-arrow">
                                 <a className="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i className="fas fa-ellipsis-v fa-sm fa-fw text-gray-400" />
                                 </a>
@@ -141,7 +163,7 @@ export default function Home() {
                                     <div className="dropdown-divider" />
                                     <a className="dropdown-item" href="#">Something else here</a>
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
                         {/* Card Body */}
                         <div className="card-body">
@@ -153,9 +175,8 @@ export default function Home() {
                     </div>
                 </div>
                 {/* Pie Chart */}
-                <div className="col-xl-4 col-lg-5">
+                {/* <div className="col-xl-4 col-lg-5">
                     <div className="card shadow mb-4">
-                        {/* Card Header - Dropdown */}
                         <div className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                             <h6 className="m-0 font-weight-bold text-primary">Revenue Sources</h6>
                             <div className="dropdown no-arrow">
@@ -171,7 +192,6 @@ export default function Home() {
                                 </div>
                             </div>
                         </div>
-                        {/* Card Body */}
                         <div className="card-body">
                             <div className="chart-pie pt-4 pb-2">
                                 <canvas id="myPieChart" />
@@ -189,7 +209,7 @@ export default function Home() {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
             {/* Content Row */}
             <div className="row">
@@ -224,7 +244,7 @@ export default function Home() {
                         </div>
                     </div>
                     {/* Color System */}
-                    <div className="row">
+                    {/* <div className="row">
                         <div className="col-lg-6 mb-4">
                             <div className="card bg-primary text-white shadow">
                                 <div className="card-body">
@@ -289,10 +309,10 @@ export default function Home() {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
-                <div className="col-lg-6 mb-4">
-                    {/* Illustrations */}
+                {/* <div className="col-lg-6 mb-4">
+
                     <div className="card shadow mb-4">
                         <div className="card-header py-3">
                             <h6 className="m-0 font-weight-bold text-primary">Illustrations</h6>
@@ -308,7 +328,7 @@ export default function Home() {
                                 unDraw →</a>
                         </div>
                     </div>
-                    {/* Approach */}
+
                     <div className="card shadow mb-4">
                         <div className="card-header py-3">
                             <h6 className="m-0 font-weight-bold text-primary">Development Approach</h6>
@@ -321,17 +341,10 @@ export default function Home() {
                                 Bootstrap framework, especially the utility classes.</p>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
         </div>
     )
 }
 
-// export const chartArea =()=>{
 
-//     return (
-//         <div>
-
-//         </div>
-//     )
-// }

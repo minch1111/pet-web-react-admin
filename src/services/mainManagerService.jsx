@@ -146,6 +146,21 @@ const mainManageService = {
             },
             body:JSON.stringify(form)
         }).then(res=>res.json())
+    },
+    removeReport(id){
+        return fetch(`${api}/order/staff/statistical/${id}`,{
+            method:'DELETE',
+            headers:{
+                'Content-Type':'application/json'
+            }
+        }).then(res=>res.json())
+    }
+    ,
+    home(){
+        return fetch(`${api}/all`).then(res=>res.json())
+    },
+    getListCustomer(){
+        return fetch(`${api}/account/user`).then(res=>res.json())
     }
 
 }

@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { Redirect, Route, Switch } from 'react-router'
 import { Context } from '../../App'
+import ListCustomer from './components/ListCustomer'
 import ListStaff from './components/ListStaff'
 import Permission from './components/Permission'
 import ReportDetailMonth from './components/ReportDetailMonth'
@@ -22,6 +23,8 @@ export default function MainManage() {
                     <Route path="/main-manager/vouchers" exact component={Vouchers} />
 
                     <Route path="/main-manager/permission" exact component={Permission} />
+
+                    <Route path="/main-manager/customer" exact component={ListCustomer} />
                 </Switch>
 
             </div>

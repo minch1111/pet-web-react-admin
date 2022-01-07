@@ -45,6 +45,7 @@ export default function Nav() {
                     <div id="collapseTwo" className="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                         <div className="bg-white py-2 collapse-inner rounded">
                             <h6 className="collapse-header">Tasks:</h6>
+                            <Link  className="collapse-item" to="/main-manager/customer">Khách Hàng</Link>
                             <Link  className="collapse-item" to="/main-manager/staffs">Nhân Viên</Link>
                             <Link className="collapse-item" to="/main-manager/permission">Chức vụ</Link>
                             <Link className="collapse-item" to="/main-manager/report">Thu Chi</Link>
