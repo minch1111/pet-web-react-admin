@@ -4,8 +4,7 @@ import mainManagerService from '../../../services/mainManagerService'
 import useForm from "../../../hooks/useForm"
 import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css";
-
-
+import NotificationAlert from 'react-notification-alert'
 
 export default function Vouchers() {
     let [showEdit, setShowEdit] = useState(false)
@@ -145,6 +144,20 @@ export const AddVoucher = (props) => {
     //         // setForm({ ...form, dateEnd: $("#datepicker2").val() })
     //     });
     // }, [])
+    let notify = useRef()
+    var options = {};
+    options = {
+        place: 'tr',
+        message: (
+            <div>
+                Đã thêm thành công  😄😄😄
+            </div>
+        ),
+        type: "success",
+        icon: 'far fa-check-circle',
+        autoDismiss: 7,
+        closeButton: false
+    }
     let { form, error, handleSubmit, register, setForm } = useForm()
 
     // const changeDateEnd =(ev)=>{
@@ -172,13 +185,14 @@ export const AddVoucher = (props) => {
         console.log(`form`, form)
         let res = await mainManagerService.addNewVoucher(form)
         if (res.success) {
-            alert("Đã Thêm Thành Công 😄")
+            notify.current.notificationAlert(options)
             props.loadAfterAction()
         }
     }
 
     return (
         <div className="col-md-4">
+            <NotificationAlert ref={notify} />
             <div className="card w-100 border border-primary">
                 {/* <img className="card-img-top h-200px" src="/img/male-profile-picture-vector-1862205.jpg" alt="Card image cap" /> */}
                 <div className="card-body">
@@ -269,8 +283,23 @@ export const EditVoucher = (props) => {
     //     });
     // }, [])
     // console.log(`props.voucher`, props.voucher)
+
     let { form, error, register, handleSubmit, setForm } = useForm(props.voucher)
     // console.log(`form`, form)
+    let notify = useRef()
+    var options = {};
+    options = {
+        place: 'tr',
+        message: (
+            <div>
+                Đã cập nhật thành công voucher ${form.name} 😄
+            </div>
+        ),
+        type: "success",
+        icon: 'far fa-check-circle',
+        autoDismiss: 7,
+        closeButton: false
+    }
     useEffect(() => {
         setForm(props.voucher)
     }, [props.voucher])
@@ -280,12 +309,13 @@ export const EditVoucher = (props) => {
         // console.log(`form`, form)
         let res = await mainManagerService.updateVoucher(form._id, form);
         if (res.success) {
-            alert(`Đã cập nhật thành công voucher ${form.name} 😄`);
+            notify.current.notificationAlert(options)
             props.loadAfterAction()
         }
     }
     return (
         <div className="col-md-4">
+            <NotificationAlert ref={notify} />
             <div className="card w-100">
                 {/* <img className="card-img-top h-200px" src="/img/male-profile-picture-vector-1862205.jpg" alt="Card image cap" /> */}
                 <div className="card-body border border-warning">

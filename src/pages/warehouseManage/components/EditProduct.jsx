@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { useParams } from 'react-router'
 import img from "../../../assets/img/pate.png"
 import wareHouseService from '../../../services/warehouseService'
+import NotificationAlert from 'react-notification-alert'
 import useForm from '../../../hooks/useForm'
 let $ = window.$
 
@@ -10,6 +11,20 @@ export default function EditProduct() {
     let list =[]
     let [imgPresent, setImgPresent] = useState()
     let [listImg, setListImg] = useState([])
+    let notify = useRef()
+    var options = {};
+    options = {
+        place: 'tr',
+        message: (
+            <div>
+                Đã cập nhật thành công  😄😄😄
+            </div>
+        ),
+        type: "success",
+        icon: 'far fa-check-circle',
+        autoDismiss: 7,
+        closeButton: false
+    }
 
     useEffect(() => {
         function previewImages() {
@@ -149,12 +164,13 @@ export default function EditProduct() {
     const submit = async () => {
         console.log(`form`, form)
         let res = await wareHouseService.updateProduct(form,slug);
-        if(res.success) alert("Đã Cập Nhật Thành Công 😄")
+        if(res.success) { notify.current.notificationAlert(options) }
         await console.log(`res`, res)
     }
     if (!form) return <div className="col-lg-12 flex justify-center">Loading...</div>
     return (
         <div className="col-lg-12">
+            <NotificationAlert ref={notify} />
             <form onSubmit={handleSubmit(submit)} className="edit-activity">
                 <div className="edit-title flex flex-align-center">
                     <Link to="/warehouse-manage"><i className="fas fa-chevron-left text-warning margin-right-20" /></Link>

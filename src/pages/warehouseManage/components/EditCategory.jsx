@@ -1,12 +1,28 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { useParams } from 'react-router'
 import useForm from '../../../hooks/useForm'
 import wareHouseService from '../../../services/warehouseService'
+import NotificationAlert from 'react-notification-alert'
+
 
 export default function EditCategory() {
     let { form, error, handleSubmit, register, setForm } = useForm()
     const [category, setCategory] = useState()
+    let notify = useRef()
+    var options = {};
+    options = {
+        place: 'tr',
+        message: (
+            <div>
+                Đã cập nhật thành công  😄😄😄
+            </div>
+        ),
+        type: "success",
+        icon: 'far fa-check-circle',
+        autoDismiss: 7,
+        closeButton: false
+    }
     let { slug } = useParams()
     useEffect(async () => {
         let res = await wareHouseService.getDetailCategoryToEdit(slug)
@@ -16,10 +32,11 @@ export default function EditCategory() {
     console.log(`category`, category)
     const submit = async () => {
         let res = await wareHouseService.editCategory(form, category._id);
-        if (res.success===true) alert("Đã Cập Nhật Thành Công 😄")
+        if (res.success===true) {notify.current.notificationAlert(options)}
     }
     return (
         <div className="col-lg-12">
+            <NotificationAlert ref={notify} />
             <form onSubmit={handleSubmit(submit)} className="add-activity">
                 <div className="title margin-bottom-20 flex flex-align-center">
                     <Link to="/warehouse-manage/category" className="margin-right-20"><i className="fas fa-chevron-left text-warning" /></Link>

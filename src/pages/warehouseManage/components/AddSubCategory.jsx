@@ -1,21 +1,39 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import useForm from '../../../hooks/useForm'
+import NotificationAlert from 'react-notification-alert'
 import wareHouseService from '../../../services/warehouseService'
 
 export default function AddSubCategory() {
     const [category,setCategory] = useState()
     let {form,error,handleSubmit,register} = useForm()
+    let notify = useRef()
+    var options = {};
+    options = {
+        place: 'tr',
+        message: (
+            <div>
+                Đã thêm thành công  😄😄😄
+            </div>
+        ),
+        type: "success",
+        icon: 'far fa-check-circle',
+        autoDismiss: 7,
+        closeButton: false
+    }
     useEffect(async () => {
         let res = await wareHouseService.getCategory();
         setCategory(res.category)
     }, [])
     const submit = async()=>{
         let res = await wareHouseService.addSubCategory(form)
-        if(res.success) alert("Đã Thêm Thành Công 😄")
+        if(res.success) {
+            notify.current.notificationAlert(options)
+        }
     }
     return (
         <div className="col-lg-12">
+            <NotificationAlert ref={notify} />
             <form onSubmit={handleSubmit(submit)} className="add-activity">
                 <div className="title margin-bottom-20 flex flex-align-center">
                     <Link to="/warehouse-manage/category" className="margin-right-20"><i className="fas fa-chevron-left text-success" /></Link>

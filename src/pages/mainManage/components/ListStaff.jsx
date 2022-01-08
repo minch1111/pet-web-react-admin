@@ -205,7 +205,8 @@ export const AddStaff = (props) => {
         ),
         type: "success",
         icon: 'far fa-check-circle',
-        autoDismiss: 7
+        autoDismiss: 7,
+        closeButton:false
     }
     const submit = async () => {
         console.log(`form`, form)

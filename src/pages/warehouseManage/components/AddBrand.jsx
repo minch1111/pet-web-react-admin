@@ -1,17 +1,34 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState,useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import useForm from "../../../hooks/useForm"
 import warehouseService from "../../../services/warehouseService"
+import NotificationAlert from 'react-notification-alert'
+
 
 export default function AddBrand() {
     const [info,setInfo] = useState()
     const [allSubCategory,setAllSubCategory]=useState()
     let {form,error,handleSubmit,register} = useForm()
-
+    let notify = useRef()
+    var options = {};
+    options = {
+        place: 'tr',
+        message: (
+            <div>
+                Đã thêm thành công  😄😄😄
+            </div>
+        ),
+        type: "success",
+        icon: 'far fa-check-circle',
+        autoDismiss: 7,
+        closeButton: false
+    }
     const submit =async ()=>{
         setInfo(form)
         let res = await warehouseService.addNewBrand(form)
-        if(res.success) alert("Đã Thêm Thành Công 😄")
+        if(res.success) {
+            notify.current.notificationAlert(options)
+        }
         // console.log(`res`, res)
     }
     useEffect(async () => {
@@ -22,6 +39,7 @@ export default function AddBrand() {
     // console.log(`allSubCategory`, allSubCategory)
     return (
         <div className="col-lg-12">
+            <NotificationAlert ref={notify} />
             <form onSubmit={handleSubmit(submit)} className="add-activity">
                 <div className="title margin-bottom-20 flex flex-align-center">
                     <Link to="/warehouse-manage/brand" className="margin-right-20"><i className="fas fa-chevron-left text-success" /></Link>

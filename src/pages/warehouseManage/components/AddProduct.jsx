@@ -4,14 +4,27 @@ import img from '../../../assets/img/pate.png'
 import useForm from '../../../hooks/useForm'
 import warehouseService from '../../../services/warehouseService'
 import { Upload, Modal, Button } from 'antd'
+import NotificationAlert from 'react-notification-alert'
 
 let $ = window.$
 
 export default function AddProduct() {
-
-
     let [imgPresent, setImgPresent] = useState()
     let [listImg, setListImg] = useState([])
+    let notify = useRef()
+    var options = {};
+    options = {
+        place: 'tr',
+        message: (
+            <div>
+                Đã thêm thành công  😄😄😄
+            </div>
+        ),
+        type: "success",
+        icon: 'far fa-check-circle',
+        autoDismiss: 7,
+        closeButton: false
+    }
     let list = []
     useEffect(() => {
         function previewImages() {
@@ -37,10 +50,10 @@ export default function AddProduct() {
                         setListImg(list)
                         // setForm({...form,lisImage:list})
                     });
-    
+
                     reader.readAsDataURL(file);
                 // }
-               
+
 
             }
 
@@ -140,7 +153,7 @@ export default function AddProduct() {
                     list.push(reader.result)
                 };
                 reader.readAsDataURL(file);
-            
+
             // }
             // else{
             //     ev.currentTarget.value=null
@@ -158,11 +171,14 @@ export default function AddProduct() {
         console.log(`form in Submit`, form)
         let res = await warehouseService.addNewProduct(form);
         await console.log(`res`, res)
-        if (res.success) alert("Đã Thêm Thành Công 😄")
+        if (res.success) {
+            notify.current.notificationAlert(options)
+        }
     }
 
     return (
         <div className="col-lg-12">
+            <NotificationAlert ref={notify} />
             <form onSubmit={handleSubmit(submit)} className="add-activity" enctype='multipart/form-data'>
                 <div className="title margin-bottom-20 flex flex-align-center">
                     <Link to="/warehouse-manage" className="margin-right-20"><i className="fas fa-chevron-left text-success" /></Link>
@@ -266,9 +282,9 @@ export default function AddProduct() {
                 </div>
                 <div className="form-group">
                     <label >Hình Ảnh</label>
-                    
+
                     <input type="file" id="file-input" onChange={handleChangeList} className="form-control btn-file" multiple accept="gif|jpg|png" />
-                    
+
                     <div id="preview" className="margin-top-20 pad-20" style={{ border: '1px solid #d1d3e2', borderRadius: '7px' }}>
                         <p>No file chosen</p>
                     </div>
